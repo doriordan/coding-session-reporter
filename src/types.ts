@@ -48,6 +48,18 @@ export interface SessionDetail extends SessionSummary {
   subagents?: SubagentSummary[]
 }
 
+export interface SearchResult {
+  sessionId: string
+  project: string
+  gitBranch?: string
+  startedAt: string
+  endedAt?: string
+  firstPrompt: string
+  messageCount: number
+  matches: UserMessage[]
+  matchCount: number
+}
+
 // Shape of a sessions-index.json entry
 export interface IndexEntry {
   sessionId: string
