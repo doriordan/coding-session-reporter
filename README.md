@@ -4,21 +4,21 @@ Lightweight MCP server for obtaining insights into your agentic coding sessions 
 
 Initially this tool supports only Claude Code.
 
-## What It Does
+## Overview
 
-Claude Code generates transcript files of sessions into `~/.claude/projects/`. While Claude Code uses these transcripts when (for example) resuming sessions or generating its custom report using `/insights` commnd, it does not directly expose the data in these transcripts to general user queries.
+Claude Code generates transcript files of sessions into `~/.claude/projects/`, and utilises these transcripts for - amongst other things - a `/insights` command that generates a very specific report on your coding activity according to what Claude thinks is important.
 
-This MCP server exposes tools that can be used with your assistant (which will probably be Claude but may be another tool that supports MCP) for querying these session transcripts, potentilly by project and/or date range.
+But what if you are interested in other inisghts than the default provided by Claude? This MCP server exposes tools that can be used with your assistant (which will probably be Claude but may be another tool that supports MCP) to ask for insights and reports according to your specific requirements, potentially for a specific project and/or date range.
 
-## Use Cases
+#### Use Cases
 
-This can be used for all sorts of queries and reports, but some example use cases include:
+This can be used for all sorts of reports, but some example use cases include:
 
 - _Custom Insights_ : the built-in `/insights` command gives you lots of useful information which can help you understand and improve how you use Claude, but you may find custom reports that focus on insights, trends, projects and date ranges of specific interest to be even more useful.
 - _Standups / Progress Reporting_: you have been working on dozens or even hundreds of features across many sessions and subagents and now need to report on your progress at your daily or weekly standup? Just ask Claude.
 - _Traceability_: you have built a new service across multiple sessions and now need to take a step back and review or document how you arrived at design decisions. Querying the transcripts can help.
 
-## Quickstart
+# Quickstart
 
 By its nature this server is intended to be installed and used locally on the developer laptop or workstation, alongside Claude Code.
 
@@ -33,21 +33,21 @@ cd <path-to-repo> && npm install
 claude mcp add coding-session-reporter --scope user -- <path-to-repo>/node_modules/.bin/tsx <path-to-repo>/src/index.ts
 ```
 
-You will then (after granting permissions for this server when prompted) be able to ask Claude various questions about your Claude sessions, as in the following examples.
+You will then (after granting permissions for this server when prompted) be able to ask Claude various questions about your Claude sessions - you could start by trying some of these example prompts:
 
-## Example Prompts
+### Example Prompts
 
 `summarise key pain points encountered coding this project`
 
 `summarise coding activity yesterday by project in standup presentation appropriate format`
 
-`for the project 'my_project' rank the busiest days over the last month`
+`for the current project rank the busiest days over the last month`
 
 `provide a high level summary of subagent usage across all projects yesterday`
 
 `show me all messages in the last month that reference typescript, broken down by project`
 
-## Tools
+# Tools
 
 - **`list_projects`** — List all projects that have Claude Code transcript data, with session counts and last active date
 - **`get_sessions_summary`** — Get a high level summary of sessions (optionally for specific project and/or date range)
@@ -56,7 +56,7 @@ You will then (after granting permissions for this server when prompted) be able
 - **`get_subagent_detail`** - get full details (user messages, tools used) for a specific subagent
 - **`search_sessions`** - search for a specific keyword (optionally for a specific project and/or date range), returning all matching user/assistant messages up to some configurable per session maximum count.
 
-## Performance And Context Usage
+# Performance And Context Usage
 
 For most _"normal"_ sessions and queries, this MCP server provides quick results with modest additional context usage implications. In the absence of this MCP server, Claude would probably try to answer questions like the above by using bash tools to directly access and parse the session transcripts. In most cases this leads to more complex and slower processing, higher context usage and more error prone results, so this server remains the best choice for typical cases.
 
