@@ -1,22 +1,39 @@
 # MCP Coding Insights
 
-Lightweight MCP server for obtaining insights into your agentic coding sessions across potentially multiple projects and sessions.
+Lightweight MCP server that lets you gain desired insights into your coding activities by just asking your agent.
 
 Initially this tool supports only Claude Code.
 
 ## Overview
 
-Claude Code generates transcript files of sessions into `~/.claude/projects/`, and utilises these transcripts for - amongst other things - a `/insights` command that generates a very specific report on your coding activity according to what Claude thinks is important.
+Claude Code supports an `/insights` command that generates a very specific report on your coding activity for a fixed time span.
 
-But what if you are interested in other inisghts than the default provided by Claude? This MCP server exposes tools that can be used with your assistant (which will probably be Claude but may be another tool that supports MCP) to ask for insights and reports according to your specific requirements, potentially for a specific project and/or date range.
+This MCP server expands that capability by exposing tools that the agent can use to serve reports tailored to your stated requirements as opposed to a predefined format, and if you want can be scoped to specific projects and time spans.
 
-#### Use Cases
+The tools access the same session transcript files under `~/.claude/projects/`as the `/insights` command, but give you the power to make ad-hoc reporting requests on that session information.
+
+### Use Cases
 
 This can be used for all sorts of reports, but some example use cases include:
 
-- _Custom Insights_ : the built-in `/insights` command gives you lots of useful information which can help you understand and improve how you use Claude, but you may find custom reports that focus on insights, trends, projects and date ranges of specific interest to be even more useful.
-- _Standups / Progress Reporting_: you have been working on dozens or even hundreds of features across many sessions and subagents and now need to report on your progress at your daily or weekly standup? Just ask Claude.
+- _Custom Insights_ : the built-in `/insights` command gives you lots of information which can potentially help you understand and improve how you use Claude, but you may find custom reports that focus on insights, trends, projects and/or date ranges that you or your team are interested in to be even more useful. A simple example might be `summarise key pain points encountered coding this project`
+- _Standups / Progress Reporting_: you have been working on dozens or even hundreds of features across many sessions and subagents and now need to report on your progress at your daily or weekly standup? Just ask Claude to give you the highlights.
 - _Traceability_: you have built a new service across multiple sessions and now need to take a step back and review or document how you arrived at design decisions. Querying the transcripts can help.
+
+### Examples
+
+The following are just a few examples of the kind of insights and reports that you can get from the agent when you have this MCP server enabled:
+
+`summarise key pain points encountered coding this project`
+
+`summarise coding activity yesterday by project in standup presentation appropriate format`
+
+`for the current project rank the busiest days over the last month`
+
+`provide a high level summary of subagent usage across all projects yesterday`
+
+`show me all messages in the last month that reference typescript, broken down by project`
+
 
 # Quickstart
 
@@ -33,19 +50,7 @@ cd <path-to-repo> && npm install
 claude mcp add coding-session-reporter --scope user -- <path-to-repo>/node_modules/.bin/tsx <path-to-repo>/src/index.ts
 ```
 
-You will then (after granting permissions for this server when prompted) be able to ask Claude various questions about your Claude sessions - you could start by trying some of these example prompts:
-
-### Example Prompts
-
-`summarise key pain points encountered coding this project`
-
-`summarise coding activity yesterday by project in standup presentation appropriate format`
-
-`for the current project rank the busiest days over the last month`
-
-`provide a high level summary of subagent usage across all projects yesterday`
-
-`show me all messages in the last month that reference typescript, broken down by project`
+You will then (after granting permissions for this server when prompted) be able to ask Claude various questions about your Claude sessions - you could start by trying some of the example prompts above.
 
 # Tools
 
@@ -73,4 +78,4 @@ _Tip #1_: Try constraining the query to the specific project(s), date range and/
 
 _Tip #2_: The easiest and probably best general strategy is to enable this server and let Claude handle automatically falling back to the direct approach if the reporting tool call fails (most likely due to the tool results exceeding context limits).
 
-_Tip #3_: Use distinct sessions for your reporting that are separate to those you use for your coding activities - this ensures the context usage for reporting doesn't affect your coding sessions and vice versa.
+_Tip #3_: Use distinct sessions for your reporting that are separate to those you use for your coding activities - this ensures the context usage for reporting doesn't affect your coding sessions and vice versa. You can even use an agent other than Claude for this reporting, as long as the agent supports local MCP services.
