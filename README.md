@@ -24,7 +24,9 @@ generate a weekly summary report including key activities and high level breakdo
 
 Claude will generate a HTML report into a temporary directory and open it up in browser.
 
-Feel free to extend or customise this skill according to your use cases and preferences.
+Use of this skill is entirely optional -  without this skill Claude will generally output the report straight to the terminal. 
+
+Feel free to extend or customise the skill according to your use cases and preferences.
 
 ### Use Cases
 
