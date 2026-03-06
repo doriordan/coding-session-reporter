@@ -1,6 +1,6 @@
 # MCP Coding Insights
 
-Lightweight MCP server that lets you flexibly gather insights into your coding activities by just asking your agent.
+Lightweight MCP server combined with a starting skill that lets you flexibly report insights into your coding activities by just asking your agent.
 
 Initially this tool supports only Claude Code.
 
@@ -11,6 +11,20 @@ Claude Code supports an `/insights` command that generates a very specific repor
 This MCP server expands that capability by exposing tools that the agent can use to serve reports tailored to your stated requirements as opposed to a predefined format, and if you want can be scoped to specific projects and time spans. The tools are not only useful for strategic reports and insights but also for quick ad-hoc reporting and searches.
 
 The tools access the same session transcript files under `~/.claude/projects/`as the `/insights` command, but give you the power to make ad-hoc reporting requests on that session information.
+
+### Skills
+
+This repository also includes a HTML Reporter skill that helps guide Claude when generating insights and reports using this MCP server. The skill generates an appropriate report based on the expressed user intent, using the MCP server to retrieve relavant session details.
+
+To enable this skill, copy it from [here](./skills/html-reporter/SKILL.md) into your skills (e.g. under `~/.claude/skills/html-coding-reporter/`), restart Claude and tell it your intention e.g.
+
+```claude
+generate a weekly summary report including key activities and high level breakdown of time spent on each project
+```
+
+Claude will generate a HTML report into a temporary directory and open it up in browser.
+
+Feel free to extend or customise this skill according to your use cases and preferences.
 
 ### Use Cases
 
@@ -23,6 +37,8 @@ This can be used for all sorts of reports, but some example use cases include:
 ### Examples
 
 The following are just a few examples of the kind of insights and reports that you can get from the agent when you have this MCP server enabled:
+
+`generate a weekly summary report including key activities and high level breakdown of time spent on each project`
 
 `summarise key pain points encountered coding this project`
 
@@ -51,6 +67,7 @@ claude mcp add mcp-coding-insights --scope user -- `pwd`/node_modules/.bin/tsx `
 
 You will then (after granting permissions for this server when prompted) be able to ask Claude various questions about your Claude sessions - you could start by trying some of the example prompts above.
 
+
 # Tools
 
 - **`list_projects`** — List all projects that have Claude Code transcript data, with session counts and last active date
@@ -78,3 +95,5 @@ _Tip #1_: Try constraining the query to the specific project(s), date range and/
 _Tip #2_: The easiest and probably best general strategy is to enable this server and let Claude handle automatically falling back to the direct approach if the reporting tool call fails (most likely due to the tool results exceeding context limits).
 
 _Tip #3_: Use distinct sessions for your reporting that are separate to those you use for your coding activities - this ensures the context usage for reporting doesn't affect your coding sessions and vice versa. You can even use an agent other than Claude for this reporting, as long as the agent supports local MCP services.
+
+_Tip #4_: Use skills to capture context management rules relevant for your use case for Claude. For example, the included HTML Coding Reporter skill has explicit step-by-step instructions to minimise context usage, in this case by loading messages one session at a time when summarising by session - it discards the messages for that session (retaining only the summary) before proceeding to the next session.
