@@ -1,6 +1,6 @@
 ---
 name: html-coding-report
-description: Use when the user asks to generate a report, summary, or visualization of their coding sessions — e.g. "generate a report for this week", "show me what I worked on", "create a project summary"
+description: Use ONLY when the user explicitly asks for an HTML report of their coding sessions — e.g. "generate an HTML report for this week", "create an HTML coding report", "make me an HTML summary of my sessions". Do NOT trigger for general questions about sessions, summaries in plain text, or any report request that doesn't explicitly mention HTML.
 ---
 
 # HTML Report Generator
