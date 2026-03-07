@@ -14,9 +14,7 @@ The tools access the same session transcript files under `~/.claude/projects/`as
 
 ### Skills
 
-This repository also includes a HTML Coding Reporter skill that helps Claude to generate self-contained HTML reports into your coding activities. The skill is used to generate an appropriate report based on the expressed user intent, using the MCP server to retrieve relavant session details.
-
-Use of this skill is entirely optional -  without this skill Claude will generally output the report in text format straight to the terminal. 
+This repository also includes an optional HTML Coding Reporter skill that helps Claude to generate self-contained HTML reports into your coding activities. The skill is used to generate an appropriate HTML report based on the expressed user intent, using the MCP server to retrieve relavant session details.
 
 Feel free to extend or customise the skill according to your use cases and preferences.
 
@@ -53,15 +51,15 @@ claude mcp add mcp-coding-insights --scope user -- `pwd`/node_modules/.bin/tsx `
 
 You will then (after granting permissions for this server when prompted) be able to ask Claude various questions about your Claude sessions - you could start by trying some of the example prompts above.
 
-### Skills Setup
+### HTML Reporting Skill Setup
 
-To enable the HTML Coding Reporter skill, copy it from [here](./skills/html-reporter/SKILL.md) into your skills (e.g. under `~/.claude/skills/html-coding-reporter/`), restart Claude. Now you can generate HTML reports tailored to your intention - for example, try the following in Claude:
+To enable the HTML Coding Reporter skill, copy it from [here](./skills/html-reporter/SKILL.md) into your skills (e.g. under `~/.claude/skills/html-coding-reporter/`), restart Claude. Now you can generate HTML reports tailored to your intention - for example, try the following in Claude Code:
 
 ```claude
-generate a weekly summary report including key activities and high level breakdown of time spent on each project
+generate a HTML weekly summary report including key activities and high level breakdown of time spent on each project
 ```
 
-Claude will generate a HTML report into a temporary directory and open it up in browser.
+The agent will generate a HTML report into a temporary directory and open it up in a browser. It will only use this skill if you explicitly ask for a HTML report, otherwise it will just output a text report to the terminal which is generally a bit quicker but leaves Claude to decide the flow and steps.
 
 # Tools
 

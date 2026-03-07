@@ -1,6 +1,6 @@
 ---
 name: html-coding-report
-description: Use ONLY when the user explicitly asks for an HTML report of their coding sessions — e.g. "generate an HTML report for this week", "create an HTML coding report", "make me an HTML summary of my sessions". Do NOT trigger for general questions about sessions, summaries in plain text, or any report request that doesn't explicitly mention HTML.
+description: Use when the user explicitly mentions HTML alongside a request about their coding sessions — e.g. "generate an HTML report for this week", "make me an html summary of my sessions", "build an html dashboard of my coding activity", "create an html page showing what I coded". Trigger on any phrasing that pairs 'html' with session or coding activity output. Do NOT trigger for plain-text summaries, markdown, PDFs, standup updates, or any session query that does not explicitly mention HTML.
 ---
 
 # HTML Report Generator
